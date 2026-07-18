@@ -1,0 +1,20 @@
+{
+  "name": "hashim-workflows",
+  "interface": {
+    "displayName": "Hashim Workflows"
+  },
+  "plugins": [
+    {
+      "name": "engineering-workflows",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-workflows"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

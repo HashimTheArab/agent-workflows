@@ -1,0 +1,17 @@
+{
+  "name": "hashim-workflows",
+  "owner": {
+    "name": "HashimTheArab"
+  },
+  "metadata": {
+    "description": "Portable engineering workflows for coding agents"
+  },
+  "plugins": [
+    {
+      "name": "engineering-workflows",
+      "source": "./plugins/engineering-workflows",
+      "description": "Disciplined engineering workflows without mandatory specs or runtime clutter",
+      "category": "development"
+    }
+  ]
+}

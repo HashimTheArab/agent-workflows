@@ -1,0 +1,5 @@
+interface:
+  display_name: "Code Review"
+  short_description: "Run focused independent code review"
+policy:
+  allow_implicit_invocation: false

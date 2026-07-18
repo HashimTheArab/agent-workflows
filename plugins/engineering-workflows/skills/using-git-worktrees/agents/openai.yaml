@@ -1,0 +1,5 @@
+interface:
+  display_name: "Using Git Worktrees"
+  short_description: "Create isolated git worktrees for parallel feature work"
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Deep Analysis"
+  short_description: "Explain repository behavior with ranked evidence"

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Writing Plans"
+  short_description: "Write proportional implementation plans on request"
+policy:
+  allow_implicit_invocation: false

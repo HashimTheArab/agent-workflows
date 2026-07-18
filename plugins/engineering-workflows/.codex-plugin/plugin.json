@@ -1,0 +1,27 @@
+{
+  "name": "engineering-workflows",
+  "version": "0.1.0",
+  "description": "Portable, proportional engineering workflows for disciplined development without mandatory ceremony.",
+  "author": {
+    "name": "HashimTheArab",
+    "url": "https://github.com/HashimTheArab"
+  },
+  "homepage": "https://github.com/HashimTheArab/agent-workflows",
+  "repository": "https://github.com/HashimTheArab/agent-workflows",
+  "license": "MIT",
+  "keywords": ["debugging", "tdd", "verification", "review", "agents"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Engineering Workflows",
+    "shortDescription": "Disciplined engineering without workflow ceremony.",
+    "longDescription": "Cross-agent workflows for debugging, TDD, verification, review, planning, and agent orchestration. Heavyweight processes stay explicit and ordinary changes remain direct.",
+    "developerName": "HashimTheArab",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "defaultPrompt": [
+      "Diagnose this failure systematically and fix the root cause.",
+      "Implement this change proportionally, then verify it with fresh evidence."
+    ],
+    "websiteURL": "https://github.com/HashimTheArab/agent-workflows"
+  }
+}

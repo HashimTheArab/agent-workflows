@@ -1,0 +1,5 @@
+interface:
+  display_name: "Deslop"
+  short_description: "Simplify generated code without behavior drift"
+policy:
+  allow_implicit_invocation: false
