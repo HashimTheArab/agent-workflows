@@ -32,13 +32,13 @@ def fail(message: str) -> None:
 
 def load_json(path: Path) -> dict:
     try:
-        return json.loads(path.read_text())
+        return json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         fail(f"invalid JSON at {path.relative_to(ROOT)}: {exc}")
 
 
 def parse_frontmatter(path: Path) -> dict[str, str]:
-    text = path.read_text()
+    text = path.read_text(encoding="utf-8")
     match = re.match(r"^---\n(.*?)\n---(?:\n|$)", text, re.DOTALL)
     if not match:
         fail(f"missing YAML frontmatter: {path.relative_to(ROOT)}")
@@ -56,11 +56,12 @@ def parse_frontmatter(path: Path) -> dict[str, str]:
 def validate_manifests() -> None:
     codex = load_json(PLUGIN / ".codex-plugin" / "plugin.json")
     claude = load_json(PLUGIN / ".claude-plugin" / "plugin.json")
+    agy = load_json(PLUGIN / "plugin.json")
     codex_market = load_json(ROOT / ".agents" / "plugins" / "marketplace.json")
     claude_market = load_json(ROOT / ".claude-plugin" / "marketplace.json")
 
     expected = "engineering-workflows"
-    for label, manifest in (("Codex", codex), ("Claude", claude)):
+    for label, manifest in (("Codex", codex), ("Claude", claude), ("AGY", agy)):
         if manifest.get("name") != expected:
             fail(f"{label} plugin name must be {expected!r}")
 
@@ -99,7 +100,7 @@ def validate_portability() -> None:
     for base in (PLUGIN / "skills", PLUGIN / "agents"):
         for path in base.rglob("*"):
             if path.is_file() and path.suffix in {".md", ".sh"}:
-                if FORBIDDEN_RUNTIME_RE.search(path.read_text(errors="replace")):
+                if FORBIDDEN_RUNTIME_RE.search(path.read_text(encoding="utf-8", errors="replace")):
                     fail(f"runtime-specific state reference remains in {path.relative_to(ROOT)}")
 
     for forbidden in ("hooks", ".mcp.json", "AGENTS.md", "CLAUDE.md"):

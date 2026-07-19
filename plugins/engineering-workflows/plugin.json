@@ -1,0 +1,14 @@
+{
+  "name": "engineering-workflows",
+  "version": "0.1.0",
+  "description": "Portable, proportional engineering workflows for disciplined development without mandatory ceremony.",
+  "author": {
+    "name": "HashimTheArab",
+    "url": "https://github.com/HashimTheArab"
+  },
+  "homepage": "https://github.com/HashimTheArab/agent-workflows",
+  "repository": "https://github.com/HashimTheArab/agent-workflows",
+  "license": "MIT",
+  "keywords": ["debugging", "tdd", "verification", "review", "agents"],
+  "skills": "./skills/"
+}
