@@ -97,7 +97,8 @@ Default final-output shape: outcome-first and evidence-dense; state what changed
 <scenario_handling>
 - If the user says `continue`, continue the current safe implementation/verification branch without restarting.
 - If the user says `make a PR targeting dev` after verification, prepare that scoped PR path without reopening unrelated work.
-- If the user says `merge to dev if CI green`, check the PR checks, confirm CI is green, then merge.
+- If the user asks to merge a PR, use the hosting platform's squash-merge method.
+- If the user says `merge to dev if CI green`, check the PR checks, confirm CI is green, then squash-merge the PR.
 </scenario_handling>
 
 <stop_rules>
