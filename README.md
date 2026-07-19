@@ -1,6 +1,6 @@
 # Agent Workflows
 
-Portable, proportional engineering workflows for Codex and Claude Code—debugging, TDD, verification, planning, review, and agent orchestration without mandatory specs or runtime clutter.
+Portable, proportional engineering workflows for Codex, Claude Code, and Antigravity—debugging, TDD, verification, planning, review, and agent orchestration without mandatory specs or runtime clutter.
 
 This repository distills the strongest ideas from [Superpowers](https://github.com/obra/superpowers) and [Oh My Codex](https://github.com/Yeachan-Heo/oh-my-codex) into a content-only plugin. It intentionally contains no lifecycle hooks, MCP servers, injected `AGENTS.md`/`CLAUDE.md`, daemons, or repository-local state directories.
 
@@ -29,6 +29,14 @@ claude plugin install engineering-workflows@hashim-workflows
 ```
 
 Run `/reload-plugins` in an existing session, or start a new session.
+
+## Install in Antigravity
+
+```bash
+agy plugin install https://github.com/HashimTheArab/agent-workflows
+```
+
+Start a new task after installation so Antigravity loads the skills.
 
 ## Included workflows
 
