@@ -45,6 +45,7 @@ Explicit or heavyweight workflows:
 
 - requirements clarification
 - code review
+- Codex CLI review closeout
 - deslop/refactor review
 - adversarial QA
 - parallel-agent dispatch
