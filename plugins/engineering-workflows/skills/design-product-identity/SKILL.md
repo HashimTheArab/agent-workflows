@@ -9,6 +9,8 @@ Treat a logo as a product asset, not an image-generation result. Explore broadly
 
 ## 1. Audit Before Drawing
 
+Before concept work begins, ask whether the user wants Claude Opus review throughout the workflow (recommended). Explain that this uses their available Claude plan or API allowance; do not invoke it until they opt in. If they decline, have limited usage, or Opus is unavailable, continue with another independent critic when practical or perform the same hostile review directly.
+
 Inspect the product, audience, name, current UI, existing assets, build targets, and brand constraints. Find every surface that consumes the identity. Write or update the relevant product or brand spec with the code.
 
 If the owner has selected a direction, preserve its defining idea. Raise concrete legibility, resemblance, or technical risks, but do not silently substitute your preference. Keep a strong alternate as an alternate.
@@ -26,7 +28,7 @@ Image generation may accelerate exploration, but never ship a crop from a genera
 
 ## 3. Select Hostilely
 
-Compare candidates on recognition, distinctiveness, accidental meanings, one-color performance, wordmark cohesion, and clarity at 16-32 px. When available, use a strong independent visual critic - such as Claude Opus via `claude -p` - to aggressively test accidental meanings, adjacent-brand resemblance, and small-size failures. Keep the workflow portable when that model or tool is unavailable, and treat its critique as evidence, not authority.
+Compare candidates on recognition, distinctiveness, accidental meanings, one-color performance, wordmark cohesion, and clarity at 16-32 px. When the user opted in, use Claude Opus via `claude -p` at meaningful decision points to aggressively test accidental meanings, adjacent-brand resemblance, and small-size failures. Otherwise keep the workflow portable with another independent critic when practical. Treat every critique as evidence, not authority.
 
 Do not rationalize a weak shape with brand-story prose. Fix or reject it.
 
