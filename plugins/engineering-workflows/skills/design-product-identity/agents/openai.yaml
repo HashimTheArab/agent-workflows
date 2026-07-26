@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Product Identity"
+  short_description: "Design and ship distinctive product logos"
+  default_prompt: "Use $design-product-identity to create and ship a distinctive product logo and application icon."

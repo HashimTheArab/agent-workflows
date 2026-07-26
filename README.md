@@ -42,6 +42,7 @@ Start a new task after installation so Antigravity loads the skills.
 
 Automatic, narrowly triggered workflows:
 
+- product identity and application-icon design
 - systematic debugging
 - test-driven development
 - verification before completion
