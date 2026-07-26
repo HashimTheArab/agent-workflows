@@ -26,7 +26,7 @@ Image generation may accelerate exploration, but never ship a crop from a genera
 
 ## 3. Select Hostilely
 
-Compare candidates on recognition, distinctiveness, accidental meanings, one-color performance, wordmark cohesion, and clarity at 16-32 px. Use an independent designer or model as a hostile reviewer when available; treat the critique as evidence, not authority.
+Compare candidates on recognition, distinctiveness, accidental meanings, one-color performance, wordmark cohesion, and clarity at 16-32 px. When available, use a strong independent visual critic - such as Claude Opus via `claude -p` - to aggressively test accidental meanings, adjacent-brand resemblance, and small-size failures. Keep the workflow portable when that model or tool is unavailable, and treat its critique as evidence, not authority.
 
 Do not rationalize a weak shape with brand-story prose. Fix or reject it.
 
