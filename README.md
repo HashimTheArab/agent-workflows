@@ -48,6 +48,7 @@ Automatic, narrowly triggered workflows:
 - receiving code review
 - read-only deep analysis
 - evidence-backed best-practice research
+- macOS resource/runaway-process triage
 
 Explicit or heavyweight workflows:
 
