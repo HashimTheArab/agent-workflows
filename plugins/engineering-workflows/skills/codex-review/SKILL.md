@@ -11,6 +11,8 @@ Use `codex review` as an advisory closeout check. Verify every finding against t
 
 Use `engineering-workflows:code-review` for a generic reviewer-subagent workflow. Use this skill when the requested reviewer is specifically the Codex CLI or an installed wrapper around it.
 
+This skill is for whoever *drives* Codex, never for Codex reviewing on its own behalf. `codex review` already runs Codex's built-in `review-agent`, which reads the diff directly and is forbidden from delegating. If you are that reviewer, review the diff yourself; shelling out to `codex review` only re-enters the command you are already inside. This is why the skill declares `allow_implicit_invocation: false`: it must never be auto-selected inside a review session.
+
 ## Target Selection
 
 | Work to review | Command |
@@ -27,7 +29,9 @@ git fetch origin "$base"
 codex review --base "origin/$base"
 ```
 
-Do not use `--uncommitted` on a clean PR branch: it proves only that no local patch exists. Do not pass an inline prompt with `--base`; current Codex CLI versions reject that combination.
+Do not use `--uncommitted` on a clean PR branch: it proves only that no local patch exists. Do not pass an inline prompt with `--base`; current Codex CLI versions reject that combination. When the review needs instructions of its own, run `codex exec -s read-only` with a self-contained prompt and the diff written to a file instead.
+
+`--base` compares what would actually merge: `review-agent` resolves the ref to its upstream when that is ahead, then diffs from `git merge-base`, rather than against the branch tip.
 
 ## Review Loop
 

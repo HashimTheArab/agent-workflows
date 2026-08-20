@@ -1,0 +1,5 @@
+interface:
+  display_name: "Codex Review"
+  short_description: "Drive a Codex review pass and adjudicate its findings"
+policy:
+  allow_implicit_invocation: false
