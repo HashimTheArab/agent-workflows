@@ -1,3 +1,5 @@
 interface:
   display_name: "Test-Driven Development"
-  short_description: "Implement features and bug fixes with test-first development"
+  short_description: "Run strict red-green-refactor on request"
+policy:
+  allow_implicit_invocation: false

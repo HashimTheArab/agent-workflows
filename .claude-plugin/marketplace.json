@@ -4,13 +4,13 @@
     "name": "HashimTheArab"
   },
   "metadata": {
-    "description": "Portable engineering workflows for coding agents"
+    "description": "Lean engineering safeguards for coding agents"
   },
   "plugins": [
     {
       "name": "engineering-workflows",
       "source": "./plugins/engineering-workflows",
-      "description": "Disciplined engineering workflows without mandatory specs or runtime clutter",
+      "description": "Compact safeguards and explicit specialist workflows without runtime clutter",
       "category": "development"
     }
   ]

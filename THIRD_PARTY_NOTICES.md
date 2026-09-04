@@ -9,7 +9,7 @@ Agent Workflows includes material adapted from the following projects.
 - License: MIT
 - Copyright: Copyright (c) 2025 Jesse Vincent
 
-Derived workflows include systematic debugging, test-driven development, verification before completion, review handling, parallel-agent dispatch, worktree management, branch finishing, subagent-driven development, code review, and skill authoring.
+Derived workflows include proportional engineering changes, test-driven development, review handling, branch finishing, and implementation planning.
 
 ## Oh My Codex
 
@@ -17,7 +17,7 @@ Derived workflows include systematic debugging, test-driven development, verific
 - Author: Yeachan Heo and contributors
 - Declared package license: MIT
 
-Adapted concepts include read-only analysis, bounded deslop work, best-practice research, adversarial QA, requirements clarification, and the architect, critic, debugger, executor, explorer, researcher, test-engineer, and verifier role prompts.
+Adapted concepts include bounded deslop work, best-practice research, and adversarial QA.
 
 ## MIT License Notice
 

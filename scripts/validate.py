@@ -57,13 +57,24 @@ def validate_manifests() -> None:
     codex = load_json(PLUGIN / ".codex-plugin" / "plugin.json")
     claude = load_json(PLUGIN / ".claude-plugin" / "plugin.json")
     agy = load_json(PLUGIN / "plugin.json")
+    agy_native = load_json(PLUGIN / "gemini-extension.json")
     codex_market = load_json(ROOT / ".agents" / "plugins" / "marketplace.json")
     claude_market = load_json(ROOT / ".claude-plugin" / "marketplace.json")
 
     expected = "engineering-workflows"
-    for label, manifest in (("Codex", codex), ("Claude", claude), ("AGY", agy)):
+    manifests = (
+        ("Codex", codex),
+        ("Claude", claude),
+        ("AGY", agy),
+        ("AGY native", agy_native),
+    )
+    for label, manifest in manifests:
         if manifest.get("name") != expected:
             fail(f"{label} plugin name must be {expected!r}")
+
+    versions = {manifest.get("version") for _, manifest in manifests}
+    if len(versions) != 1:
+        fail(f"plugin manifest versions must match, found {sorted(versions, key=str)!r}")
 
     for label, market in (("Codex", codex_market), ("Claude", claude_market)):
         if market.get("name") != "hashim-workflows":

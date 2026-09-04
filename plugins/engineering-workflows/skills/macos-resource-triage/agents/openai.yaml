@@ -1,0 +1,3 @@
+interface:
+  display_name: "macOS Resource Triage"
+  short_description: "Diagnose Mac CPU, memory, and runaway processes"

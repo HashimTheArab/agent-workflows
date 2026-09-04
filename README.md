@@ -1,15 +1,15 @@
 # Agent Workflows
 
-Portable, proportional engineering workflows for Codex, Claude Code, and Antigravity—debugging, TDD, verification, planning, review, and agent orchestration without mandatory specs or runtime clutter.
+Lean engineering safeguards for Codex, Claude Code, and Antigravity: proportional change verification, review handling, research, planning, and specialized QA without duplicating native agent features.
 
-This repository distills the strongest ideas from [Superpowers](https://github.com/obra/superpowers) and [Oh My Codex](https://github.com/Yeachan-Heo/oh-my-codex) into a content-only plugin. It intentionally contains no lifecycle hooks, MCP servers, injected `AGENTS.md`/`CLAUDE.md`, daemons, or repository-local state directories.
+This repository distills selected ideas from [Superpowers](https://github.com/obra/superpowers) and [Oh My Codex](https://github.com/Yeachan-Heo/oh-my-codex) into a content-only plugin. It relies on the host for code review, subagent orchestration, worktrees, skill creation, and ordinary repository analysis. It contains no lifecycle hooks, MCP servers, injected `AGENTS.md`/`CLAUDE.md`, daemons, or repository-local state.
 
 ## Principles
 
-- Discipline scales automatically: debugging, testing, review handling, and verification activate when relevant.
-- Ceremony is explicit: plans, worktrees, multi-agent execution, and adversarial QA run only when requested or deliberately selected.
+- One compact workflow covers investigation, implementation, testing, and verification proportionally.
+- Strict TDD, plans, cleanup, and adversarial QA activate only when explicitly requested.
 - Artifacts are optional: ordinary work does not create design specs or planning documents.
-- One shared skill library supports Codex and Claude Code.
+- Native host capabilities stay native rather than being re-described in long skills.
 - Every completion claim is backed by fresh evidence.
 
 ## Install in Codex
@@ -43,26 +43,20 @@ Start a new task after installation so Antigravity loads the skills.
 Automatic, narrowly triggered workflows:
 
 - product identity and application-icon design
-- systematic debugging
-- test-driven development
-- verification before completion
+- proportional engineering changes
 - receiving code review
-- read-only deep analysis
 - evidence-backed best-practice research
 - macOS resource/runaway-process triage
+- branch finishing when no integration path was chosen
 
-Explicit or heavyweight workflows:
+Explicit workflows:
 
-- requirements clarification
-- code review
-- Codex CLI review closeout
 - deslop/refactor review
 - adversarial QA
-- parallel-agent dispatch
-- subagent-driven development
-- worktree setup and branch finishing
+- strict test-driven development
 - implementation-plan writing
-- skill authoring and validation
+
+Version 0.2 removes the review, subagent, worktree, generic analysis, clarification, and skill-authoring wrappers that modern hosts already provide.
 
 ## Attribution
 
