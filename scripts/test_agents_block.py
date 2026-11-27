@@ -34,6 +34,13 @@ class AgentsBlockTest(unittest.TestCase):
         self.assertEqual(path.read_text(), first + "\ntrailing rule\n")
         self.assertEqual(ab.target_state(path, self.want), "ok")
 
+    def test_unchanged_rules_from_a_newer_commit_leave_the_file_alone(self) -> None:
+        path = self.write("AGENTS.md", "")
+        ab.sync(path, self.body, "abc1234")
+        first = path.read_text()
+        ab.sync(path, self.body, "def5678")
+        self.assertEqual(path.read_text(), first)
+
     def test_hand_edit_and_stale_source_are_caught(self) -> None:
         path = self.write("AGENTS.md", "")
         ab.sync(path, self.body, "abc1234")

@@ -75,6 +75,8 @@ def target_state(path: Path, want: str) -> str:
 
 
 def sync(path: Path, body: list[str], sha: str) -> None:
+    if target_state(path, digest(body)) == "ok":
+        return  # same rules: leave the recorded sha alone so unrelated commits cause no churn
     real = path.resolve()
     text = real.read_text(encoding="utf-8")
     lines = text.splitlines(keepends=True)
