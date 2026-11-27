@@ -1,6 +1,6 @@
 ---
 name: simplify-diff
-description: Use when a diff looks too big for the behavior it adds, or for the blind size check before review: mirrored types, field-by-field copying, parallel lists or edit sites that grow with each new field.
+description: Use when a diff looks too big for the behavior it adds (mirrored types, field-by-field copying, parallel lists, edit sites that grow with each new field), or for the blind size check before review.
 ---
 
 # Simplify Diff

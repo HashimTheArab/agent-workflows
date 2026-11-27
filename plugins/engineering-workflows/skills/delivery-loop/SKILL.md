@@ -18,7 +18,7 @@ These lines are synced into repo `AGENTS.md` files by `scripts/agents_block.py`.
 - A PR under review takes no new behavior. A new decision, second fix or new event becomes a new issue and PR.
 - Risky change: two blind design sketches; build the smaller one that meets the done lines.
 - A fix's test fails on the old code. The change deletes what it replaces.
-- Before bug review, a fresh reviewer sees only the done lines and the diff. Smallest correct version at 2/3 or less: rewrite once. Over 1.5x budget: hand back to the owner.
+- Before bug review of a change that is not small and low-risk, a fresh reviewer sees only the done lines and the diff. Smallest correct version at 2/3 or less: rewrite once. Over 1.5x budget: hand back to the owner.
 - At most 3 review rounds, counted across handoffs: whole head, review of the fix, verify only. Then hand back with options.
 - A finding needs a realistic trigger and a material effect. A P2 fix may only change, narrow or delete code, never add state, timers, flags or layers. A fix that causes a new finding is reverted.
 - Whoever wrote a step never judges it.

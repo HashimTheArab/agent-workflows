@@ -95,6 +95,8 @@ def validate_skills() -> None:
             fail(f"invalid skill name: {name!r}")
         if not description:
             fail(f"missing description: {rel}")
+        if ": " in description and not re.search(r'^description:\s*["\']', skill.read_text(encoding="utf-8"), re.M):
+            fail(f"unquoted ': ' makes the description invalid YAML: {rel}")
         if len(description) > MAX_DESCRIPTION:
             fail(f"description is {len(description)} chars, max {MAX_DESCRIPTION}: {rel}")
         lines = len(skill.read_text(encoding="utf-8").splitlines())
