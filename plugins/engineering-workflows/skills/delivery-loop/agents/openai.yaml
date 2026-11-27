@@ -1,0 +1,3 @@
+interface:
+  display_name: "Delivery Loop"
+  short_description: "Cut, build, size-check and review a change to a ready PR"

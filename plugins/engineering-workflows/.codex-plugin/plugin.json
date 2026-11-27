@@ -1,7 +1,7 @@
 {
   "name": "engineering-workflows",
-  "version": "0.2.1",
-  "description": "Lean engineering safeguards and explicit specialist workflows for modern coding agents.",
+  "version": "0.3.0",
+  "description": "A short delivery loop for coding agents (cut, build, size check, capped review) plus a few specialist skills.",
   "author": {
     "name": "HashimTheArab",
     "url": "https://github.com/HashimTheArab"
@@ -9,18 +9,28 @@
   "homepage": "https://github.com/HashimTheArab/agent-workflows",
   "repository": "https://github.com/HashimTheArab/agent-workflows",
   "license": "MIT",
-  "keywords": ["debugging", "verification", "review", "qa", "planning"],
+  "keywords": [
+    "delivery",
+    "review",
+    "scope",
+    "simplicity",
+    "research"
+  ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Engineering Workflows",
-    "shortDescription": "Lean safeguards without duplicated agent machinery.",
-    "longDescription": "Compact engineering safeguards for changes and review, plus explicit workflows for strict TDD, planning, cleanup, and adversarial QA.",
+    "shortDescription": "Cut small, build small, review a fixed number of times.",
+    "longDescription": "A delivery loop with done lines, a size budget, a blind size check and at most three review rounds, plus diff simplification, primary-source research, product identity and macOS resource triage.",
     "developerName": "HashimTheArab",
     "category": "Developer Tools",
-    "capabilities": ["Interactive", "Read", "Write"],
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
     "defaultPrompt": [
-      "Investigate this bug, fix the root cause, and verify it.",
-      "Evaluate this review feedback against the codebase."
+      "Fix this bug and take it to a ready PR.",
+      "Check whether this diff is bigger than the behavior needs."
     ],
     "websiteURL": "https://github.com/HashimTheArab/agent-workflows"
   }

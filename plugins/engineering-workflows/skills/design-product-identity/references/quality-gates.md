@@ -20,5 +20,3 @@ Inspect native renders at 16, 20, 24, 32, and 64 px. Cuts and counters must stay
 - Palette, typeface, safe area, source, and export provenance recorded.
 - Stale assets, imports, and metadata removed; build, typecheck, and packaging checks pass.
 - Source, built, deployed, and fetched hashes compared before adding favicon cache-busting.
-
-State the active direction, preserved alternates, verified surfaces, known issues, and whether trademark clearance remains outstanding.

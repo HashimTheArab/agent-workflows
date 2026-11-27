@@ -4,13 +4,13 @@
     "name": "HashimTheArab"
   },
   "metadata": {
-    "description": "Lean engineering safeguards for coding agents"
+    "description": "Delivery workflow and specialist skills for coding agents"
   },
   "plugins": [
     {
       "name": "engineering-workflows",
       "source": "./plugins/engineering-workflows",
-      "description": "Compact safeguards and explicit specialist workflows without runtime clutter",
+      "description": "A short delivery loop with a capped review, plus a few specialist skills",
       "category": "development"
     }
   ]

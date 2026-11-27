@@ -1,7 +1,7 @@
 {
   "name": "engineering-workflows",
-  "version": "0.2.1",
-  "description": "Lean engineering safeguards and explicit specialist workflows for modern coding agents.",
+  "version": "0.3.0",
+  "description": "A short delivery loop for coding agents (cut, build, size check, capped review) plus a few specialist skills.",
   "author": {
     "name": "HashimTheArab",
     "url": "https://github.com/HashimTheArab"
