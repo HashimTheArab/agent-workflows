@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the dual-platform engineering-workflows plugin."""
+"""Validate the engineering-workflows plugin for Claude Code and Codex."""
 
 from __future__ import annotations
 
@@ -8,21 +8,15 @@ import re
 import sys
 from pathlib import Path
 
+import agents_block
+
 
 ROOT = Path(__file__).resolve().parents[1]
 PLUGIN = ROOT / "plugins" / "engineering-workflows"
 NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
-FORBIDDEN_RUNTIME_RE = re.compile(
-    r"(?:^|[/`])\.(?:omx|superpowers)(?:[/`]|$)"
-    r"|\bomx\s+(?:state|setup|team|sparkshell)\b"
-    r"|\$(?:ralplan|ralph|team|deep-interview)\b"
-    r"|\bdependency-expert\b"
-    r"|\b(?:style-reviewer|performance-reviewer|quality-reviewer)\b"
-    r"|\b(?:planner|analyst)\s+for\s+(?:plan|requirements)"
-    r"|\{\{[A-Z_]+\}\}"
-    r"|Superpowers-owned",
-    re.IGNORECASE | re.MULTILINE,
-)
+MAX_DESCRIPTION = 250  # Claude Code cuts longer descriptions in its skill listing.
+MAX_SKILL_LINES = 120
+MAX_BLOCK_LINES = 12
 
 
 def fail(message: str) -> None:
@@ -54,43 +48,44 @@ def parse_frontmatter(path: Path) -> dict[str, str]:
 
 
 def validate_manifests() -> None:
-    codex = load_json(PLUGIN / ".codex-plugin" / "plugin.json")
-    claude = load_json(PLUGIN / ".claude-plugin" / "plugin.json")
-    agy = load_json(PLUGIN / "plugin.json")
-    agy_native = load_json(PLUGIN / "gemini-extension.json")
-    codex_market = load_json(ROOT / ".agents" / "plugins" / "marketplace.json")
-    claude_market = load_json(ROOT / ".claude-plugin" / "marketplace.json")
-
     expected = "engineering-workflows"
     manifests = (
-        ("Codex", codex),
-        ("Claude", claude),
-        ("AGY", agy),
-        ("AGY native", agy_native),
+        ("Codex", load_json(PLUGIN / ".codex-plugin" / "plugin.json")),
+        ("Claude", load_json(PLUGIN / ".claude-plugin" / "plugin.json")),
     )
     for label, manifest in manifests:
         if manifest.get("name") != expected:
             fail(f"{label} plugin name must be {expected!r}")
+        if not manifest.get("version"):
+            fail(f"{label} plugin manifest lacks a version")
 
-    versions = {manifest.get("version") for _, manifest in manifests}
+    versions = {manifest["version"] for _, manifest in manifests}
     if len(versions) != 1:
-        fail(f"plugin manifest versions must match, found {sorted(versions, key=str)!r}")
+        fail(f"plugin manifest versions must match, found {sorted(versions)!r}")
 
-    for label, market in (("Codex", codex_market), ("Claude", claude_market)):
+    markets = (
+        ("Codex", ROOT / ".agents" / "plugins" / "marketplace.json", lambda e: e.get("source", {}).get("path")),
+        ("Claude", ROOT / ".claude-plugin" / "marketplace.json", lambda e: e.get("source")),
+    )
+    for label, path, source_of in markets:
+        market = load_json(path)
         if market.get("name") != "hashim-workflows":
             fail(f"{label} marketplace name must be 'hashim-workflows'")
-        entries = market.get("plugins", [])
-        if not any(entry.get("name") == expected for entry in entries):
+        entry = next((e for e in market.get("plugins", []) if e.get("name") == expected), None)
+        if entry is None:
             fail(f"{label} marketplace does not expose {expected}")
+        source = source_of(entry)
+        if not isinstance(source, str) or (ROOT / source).resolve() != PLUGIN.resolve():
+            fail(f"{label} marketplace source must point at {PLUGIN.relative_to(ROOT)}")
 
 
 def validate_skills() -> None:
-    skills = PLUGIN / "skills"
     count = 0
-    for directory in sorted(path for path in skills.iterdir() if path.is_dir()):
+    for directory in sorted(path for path in (PLUGIN / "skills").iterdir() if path.is_dir()):
         skill = directory / "SKILL.md"
         if not skill.is_file():
             fail(f"skill directory lacks SKILL.md: {directory.relative_to(ROOT)}")
+        rel = skill.relative_to(ROOT)
         metadata = parse_frontmatter(skill)
         name = metadata.get("name", "")
         description = metadata.get("description", "")
@@ -99,31 +94,41 @@ def validate_skills() -> None:
         if not NAME_RE.fullmatch(name):
             fail(f"invalid skill name: {name!r}")
         if not description:
-            fail(f"missing description: {skill.relative_to(ROOT)}")
+            fail(f"missing description: {rel}")
+        if ": " in description and not re.search(r'^description:\s*["\']', skill.read_text(encoding="utf-8"), re.M):
+            fail(f"unquoted ': ' makes the description invalid YAML: {rel}")
+        if len(description) > MAX_DESCRIPTION:
+            fail(f"description is {len(description)} chars, max {MAX_DESCRIPTION}: {rel}")
+        lines = len(skill.read_text(encoding="utf-8").splitlines())
+        if lines > MAX_SKILL_LINES:
+            fail(f"{rel} has {lines} lines, max {MAX_SKILL_LINES}")
         count += 1
-
-    if count < 10:
-        fail(f"expected a substantive bundle, found only {count} skills")
     print(f"Validated {count} skills")
 
 
-def validate_portability() -> None:
-    for base in (PLUGIN / "skills", PLUGIN / "agents"):
-        for path in base.rglob("*"):
-            if path.is_file() and path.suffix in {".md", ".sh"}:
-                if FORBIDDEN_RUNTIME_RE.search(path.read_text(encoding="utf-8", errors="replace")):
-                    fail(f"runtime-specific state reference remains in {path.relative_to(ROOT)}")
+def validate_agents_block() -> None:
+    try:
+        body = agents_block.source_body()
+    except agents_block.BlockError as exc:
+        fail(str(exc))
+    if not body:
+        fail("agents block is empty")
+    if len(body) > MAX_BLOCK_LINES:
+        fail(f"agents block has {len(body)} lines, max {MAX_BLOCK_LINES}")
+    print(f"Agents block: {len(body)} lines")
 
+
+def validate_no_injection() -> None:
     for forbidden in ("hooks", ".mcp.json", "AGENTS.md", "CLAUDE.md"):
         if (PLUGIN / forbidden).exists():
             fail(f"forbidden plugin runtime surface exists: {forbidden}")
-    print("No runtime-specific state or instruction injection detected")
 
 
 def main() -> None:
     validate_manifests()
     validate_skills()
-    validate_portability()
+    validate_agents_block()
+    validate_no_injection()
     print("Validation passed")
 
 

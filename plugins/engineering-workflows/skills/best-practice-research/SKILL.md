@@ -1,18 +1,19 @@
 ---
 name: best-practice-research
-description: Use when a technical decision depends on current official documentation, upstream source, standards, release notes, or comparative best-practice evidence.
+description: Use when an answer depends on facts that may have changed since training (library or API versions, limits, prices, release notes) or on an external standard or spec.
 ---
-
-<!-- Adapted from concepts in Oh My Codex by Yeachan Heo and contributors (declared MIT). See THIRD_PARTY_NOTICES.md. -->
 
 # Best-Practice Research
 
-Ground time-sensitive technical guidance in primary sources.
+Answer from primary sources that match the versions in use.
 
-1. Inspect repository-local versions, constraints, and current usage when they affect the answer.
-2. Search official documentation, upstream source, standards, release notes, or maintainer guidance. Use third-party material only to fill a named gap.
-3. Check dates and versions. Flag stale, conflicting, undocumented, or version-mismatched evidence.
-4. Stop after the smallest evidence set that supports the decision; do not research merely to lengthen the answer.
-5. Lead with the recommendation. Cite each material claim near the claim, distinguish source facts from inference, and state unresolved uncertainty or implementation constraints.
+1. Check the repo first: pinned versions, lockfiles, config and how the thing is used today.
+2. Read the official docs, upstream source, the standard or the release notes for those versions. Use third-party
+   posts only to fill a gap you can name.
+3. Note the date and version of each source. Say when sources are old, disagree or do not match the version in use.
+4. Stop at the smallest set of sources that settles the decision.
+5. Give the recommendation first. Cite each key claim next to it, keep source facts apart from your inference, and
+   name what is still unknown.
 
-For adoption, replacement, or upgrade decisions, compare the relevant candidates directly; usage guidance for one option is not a selection analysis. Skip this workflow when current external evidence cannot change a repository-local answer.
+To choose between tools or approaches, compare the candidates side by side; docs for one option are not a comparison.
+Skip this when no outside source could change a repo-local answer.

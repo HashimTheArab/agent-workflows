@@ -10,6 +10,7 @@ Measure system pressure before blaming one process.
 1. Compare load with logical cores using `uptime` and `sysctl -n hw.ncpu`.
 2. Rank CPU and memory consumers with `ps -Ao pid,ppid,etime,pcpu,pmem,rss,command -r` and `-m`; check `vm_stat` for memory pressure.
 3. For agent, browser-automation, or developer-tool sessions, inspect the full parent/child tree. Record each candidate root PID, age, command, and working directory (`lsof -a -p PID -d cwd`) because a quiet parent may own many expensive children.
+   Known repeat offenders: old `claude --dangerously-skip-permissions` sessions, whose MCP server children are not reaped, and ChatGPT.app Codex Computer Use sessions (`kernel.js`), which can run for days and hold hundreds of node/bun/codex workers.
 4. Cross-check surprising totals against a fresh `ps` snapshot. PID churn can invalidate naive recursive counts; use a visited set when scripting a tree walk.
 5. Report the measured bottleneck and candidate sessions. Do not terminate anything during a diagnose-only request.
 

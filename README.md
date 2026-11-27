@@ -1,66 +1,68 @@
 # Agent Workflows
 
-Lean engineering safeguards for Codex, Claude Code, and Antigravity: proportional change verification, review handling, research, planning, and specialized QA without duplicating native agent features.
+A short delivery loop for coding agents, plus a few specialist skills, packaged as one plugin for Claude Code and
+Codex. The plugin is content only: no hooks, MCP servers, daemons or injected `AGENTS.md`/`CLAUDE.md`.
 
-This repository distills selected ideas from [Superpowers](https://github.com/obra/superpowers) and [Oh My Codex](https://github.com/Yeachan-Heo/oh-my-codex) into a content-only plugin. It relies on the host for code review, subagent orchestration, worktrees, skill creation, and ordinary repository analysis. It contains no lifecycle hooks, MCP servers, injected `AGENTS.md`/`CLAUDE.md`, daemons, or repository-local state.
+## Skills
+
+- `delivery-loop`: cut a change to done lines and a size budget, build the smallest version, run a blind size check,
+  then at most three review rounds. Loads on ordinary coding tasks.
+- `simplify-diff`: find the smallest correct version of an overgrown diff; the method behind the size check.
+- `best-practice-research`: answer version-sensitive or external-standard questions from primary sources.
+- `design-product-identity`: design and ship a product logo or app-icon family.
+- `macos-resource-triage`: find what is making a Mac hot or slow.
 
 ## Principles
 
-- One compact workflow covers investigation, implementation, testing, and verification proportionally.
-- Strict TDD, plans, cleanup, and adversarial QA activate only when explicitly requested.
-- Artifacts are optional: ordinary work does not create design specs or planning documents.
-- Native host capabilities stay native rather than being re-described in long skills.
-- Every completion claim is backed by fresh evidence.
+- Cut before code: at most five done lines and a size budget. Only the owner settles product decisions.
+- A PR under review takes no new behavior; new decisions become new PRs.
+- Review is capped at three rounds. A P2 fix may only change, narrow or delete code.
+- Review bots are advisory. Repo rules add gates, device checks and rollout.
+- Skills stay short and do not restate what the host already does well.
 
-## Install in Codex
+## Install
+
+Codex:
 
 ```bash
 codex plugin marketplace add HashimTheArab/agent-workflows
 codex plugin add engineering-workflows@hashim-workflows
 ```
 
-Start a new task after installation so Codex loads the skills.
-
-## Install in Claude Code
+Claude Code:
 
 ```bash
 claude plugin marketplace add HashimTheArab/agent-workflows
 claude plugin install engineering-workflows@hashim-workflows
 ```
 
-Run `/reload-plugins` in an existing session, or start a new session.
+Start a new session (or run `/reload-plugins` in Claude Code) after installing.
 
-## Install in Antigravity
+## AGENTS.md block
+
+The hard rules live once, between the `agents-block` markers in
+[`delivery-loop/SKILL.md`](plugins/engineering-workflows/skills/delivery-loop/SKILL.md). Repos that opt in carry a
+copy so every agent sees them even when the plugin is not loaded. A maintainer writes and checks the copies:
 
 ```bash
-agy plugin install https://github.com/HashimTheArab/agent-workflows
+python3 scripts/agents_block.py sync path/to/AGENTS.md   # write or replace the block; appends it if absent
+python3 scripts/agents_block.py check path/to/AGENTS.md  # exit 1 if missing, hand-edited or behind the source
+python3 scripts/agents_block.py status [path ...]        # print the source hash and each file's state
 ```
 
-Start a new task after installation so Antigravity loads the skills.
+Symlinked `AGENTS.md` files are followed and text outside the markers is left alone. The copy starts with a
+`source: agent-workflows <sha> sha256:<hash>` line. A consumer repo can catch hand edits in CI without this repo:
 
-## Included workflows
+```bash
+sed -n '/^<!-- agents-block:start -->$/,/^<!-- agents-block:end -->$/p' AGENTS.md | sed '1,2d;$d' | shasum -a 256
+```
 
-Automatic, narrowly triggered workflows:
+and compare the result with the recorded hash.
 
-- product identity and application-icon design
-- proportional engineering changes
-- receiving code review
-- evidence-backed best-practice research
-- macOS resource/runaway-process triage
-- branch finishing when no integration path was chosen
+## Credits
 
-Explicit workflows:
-
-- deslop/refactor review
-- adversarial QA
-- strict test-driven development
-- implementation-plan writing
-
-Version 0.2 removes the review, subagent, worktree, generic analysis, clarification, and skill-authoring wrappers that modern hosts already provide.
-
-## Attribution
-
-Several workflows are adapted from Superpowers and Oh My Codex under their declared MIT licenses. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for provenance and license notices.
+Earlier versions adapted ideas from [Superpowers](https://github.com/obra/superpowers) and
+[Oh My Codex](https://github.com/Yeachan-Heo/oh-my-codex). The current text is written from scratch.
 
 ## License
 

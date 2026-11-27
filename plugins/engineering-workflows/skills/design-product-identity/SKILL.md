@@ -12,4 +12,4 @@ Treat identity as a product system, not a generated picture.
 3. Compare recognition, distinctiveness, one-color use, wordmark fit, and clarity at 16–32 px. Use an independent critic when practical; critique is evidence, not authority.
 4. Construct the chosen mark as deterministic vector geometry. Define canonical SVG, lockup, one-color/reverse forms, app-icon master, safe area, palette, typography/license, and export provenance. Never ship a crop from a generated concept sheet.
 5. Read [the quality gates](references/quality-gates.md), render a size rail, inspect light/dark and real product contexts, then propagate from the canonical source with existing platform generators.
-6. Run relevant build, packaging, and visual smoke checks. Identify the active direction, preserved alternates, validation evidence, known risks, and whether trademark clearance remains outstanding.
+6. Run relevant build, packaging, and visual smoke checks. Report the active direction, preserved alternates, verified surfaces, known issues, and whether trademark clearance remains outstanding.

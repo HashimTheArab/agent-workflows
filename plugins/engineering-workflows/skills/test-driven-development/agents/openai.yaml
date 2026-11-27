@@ -1,5 +1,0 @@
-interface:
-  display_name: "Test-Driven Development"
-  short_description: "Run strict red-green-refactor on request"
-policy:
-  allow_implicit_invocation: false
