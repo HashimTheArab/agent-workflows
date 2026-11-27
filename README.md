@@ -42,8 +42,7 @@ Start a new session (or run `/reload-plugins` in Claude Code) after installing.
 
 The hard rules live once, between the `agents-block` markers in
 [`delivery-loop/SKILL.md`](plugins/engineering-workflows/skills/delivery-loop/SKILL.md). Repos that opt in carry a
-copy so every agent sees them even when the plugin is not loaded. Claude Code reads `CLAUDE.md`, not `AGENTS.md`;
-in a repo with both, add an `@AGENTS.md` line to `CLAUDE.md`. A maintainer writes and checks the copies:
+copy so every agent sees them even when the plugin is not loaded. A maintainer writes and checks the copies:
 
 ```bash
 python3 scripts/agents_block.py sync path/to/AGENTS.md   # write or replace the block; appends it if absent
